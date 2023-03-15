@@ -68,7 +68,7 @@ npm install
 ```
 Chạy lệnh sau để bắt đầu start project
 ```
-DEBUG=thuc-hanh-exp:* npm start
+ npm start
 // nếu có nodemon thì bạn thêm nodemon vào  trước
-nodemon DEBUG=thuc-hanh-exp:* npm start
+nodemon npm start
 ```
