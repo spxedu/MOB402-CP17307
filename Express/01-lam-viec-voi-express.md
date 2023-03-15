@@ -72,3 +72,6 @@ Chạy lệnh sau để bắt đầu start project
 // nếu có nodemon thì bạn thêm nodemon vào  trước
 nodemon npm start
 ```
+
+## Tra cứu ejs 
+https://ejs.co/ 
