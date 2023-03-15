@@ -73,5 +73,7 @@ Chạy lệnh sau để bắt đầu start project
 nodemon npm start
 ```
 
-## Tra cứu ejs 
+## View template engine 
 https://ejs.co/ 
+
+
