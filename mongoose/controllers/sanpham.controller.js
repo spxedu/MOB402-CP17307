@@ -2,10 +2,16 @@ var fs = require('fs');
 const myMD = require('../models/sanpham.model');
 
 exports.list = async (req, res, next)=>{
+        // thêm chức năng lọc
+    let dieu_kien_loc = null;
+    //giả sử lọc theo giá tiền
+    if(typeof( req.query.price) != 'undefined') {
+        dieu_kien_loc = { price: req.query.price  };
+    } // chạy thử: ?price=20000
 
-    var listSP = await myMD.spModel.find()
+    var listSP = await myMD.spModel.find(  dieu_kien_loc   )
                     .sort( { name: 1 }  );// sắp xếp theo tên
-
+    console.log(listSP[0]);
     res.render('sanpham/list', { listSP: listSP });
 }
 
