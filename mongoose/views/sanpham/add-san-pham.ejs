@@ -1,0 +1,16 @@
+<%- include('../inc/top') %>
+<h1>Add SP</h1>
+
+<% if(msg.legth >0) { %>
+     <p class="alert alert-info">  <%= msg %>  </p>
+<% } %>
+
+<form action="" method="post" >
+
+    <input type="text" name="name" placeholder="Tên SP" >  <br>
+    <input type="number" name="price" placeholder="Giá"> <br>
+    <textarea name="description"cols="30" rows="10"></textarea>
+ 
+    <button type="submit">Save</button>
+</form> 
+<%- include('../inc/bottom') %>

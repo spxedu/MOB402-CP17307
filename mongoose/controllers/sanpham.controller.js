@@ -35,3 +35,30 @@ exports.add = (req, res, next)=>{
     }
     res.render('sanpham/add');
 }
+
+exports.addSanPham = async (req, res, next)=>{
+    // xử lý post:
+    let msg = ''; // biến để truyền thông báo ra màn hình
+    if(req.method =='POST'){
+        // kiểm tra hợp lệ dữ liệu ở đây
+
+        // tạo đối tượng model và gán dữ liệu
+        let objSP = new myMD.spModel ();
+        objSP.name = req.body.name;
+        objSP.price = req.body.price;
+        objSP.description = req.body.description;
+        // thực hiện Ghi vào CSDL
+        try {
+            let new_sp = await objSP.save();
+            console.log( new_sp );
+            msg = 'Đã thêm thành công';
+        } catch (error) {
+            msg ='Lỗi '+ error.message();
+            console.log(error);
+        }
+
+    }
+
+    res.render('sanpham/add-san-pham', { msg: msg});
+}
+
