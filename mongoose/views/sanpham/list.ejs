@@ -1,0 +1,28 @@
+<%- include('../inc/top') %>
+
+<h1>List sp</h1>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Desc</th>
+    </tr>
+    <% listSP.forEach( (objSP) => { %>
+        
+        <tr>
+            <td> <%= objSP._id %> </td>
+            <td> <%= objSP.name %> </td>
+            <td> <%= objSP.price %> </td>
+            <td> <%= objSP.description %></td>
+        </tr>
+
+   <% }); %>
+    
+</table>
+
+
+
+
+<%- include('../inc/bottom') %>
