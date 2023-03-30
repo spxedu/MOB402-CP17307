@@ -11,6 +11,10 @@ exports.list = async (req, res, next)=>{
 
     var listSP = await myMD.spModel.find(  dieu_kien_loc   )
                     .sort( { name: 1 }  );// sắp xếp theo tên
+
+    // nếu lấy 1sp;  
+    // var obj = await myMD.spModel.findById()
+
     console.log(listSP[0]);
     res.render('sanpham/list', { listSP: listSP });
 }
@@ -53,7 +57,7 @@ exports.addSanPham = async (req, res, next)=>{
             console.log( new_sp );
             msg = 'Đã thêm thành công';
         } catch (error) {
-            msg ='Lỗi '+ error.message();
+            msg ='Lỗi '+ error.message;
             console.log(error);
         }
 
