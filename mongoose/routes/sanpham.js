@@ -10,4 +10,11 @@ var multer = require('multer');
 var objUpload = multer({ dest: './tmp' });
 router.post('/add',objUpload.single("file_anh"), spCtrl.add);
 
+router.get('/add-sp', spCtrl.addSanPham);
+router.post('/add-sp', spCtrl.addSanPham);
+
+router.get('/edit/:idsp', spCtrl.editSP);
+router.post('/edit/:idsp', spCtrl.editSP);
+
+
 module.exports = router;

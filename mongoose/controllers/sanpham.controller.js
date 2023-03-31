@@ -9,8 +9,12 @@ exports.list = async (req, res, next)=>{
         dieu_kien_loc = { price: req.query.price  };
     } // chạy thử: ?price=20000
 
+    // var listSP = await myMD.spModel.find(  dieu_kien_loc   )
+    //                 .sort( { name: 1 }  );// sắp xếp theo tên
     var listSP = await myMD.spModel.find(  dieu_kien_loc   )
-                    .sort( { name: 1 }  );// sắp xếp theo tên
+                .populate('id_theloai','_id, name');
+
+    console.log( listSP );                
 
     // nếu lấy 1sp;  
     // var obj = await myMD.spModel.findById()
@@ -43,6 +47,9 @@ exports.add = (req, res, next)=>{
 exports.addSanPham = async (req, res, next)=>{
     // xử lý post:
     let msg = ''; // biến để truyền thông báo ra màn hình
+    // load ds the loại lên form
+    let listTL = await myMD.theLoaiModel.find();
+
     if(req.method =='POST'){
         // kiểm tra hợp lệ dữ liệu ở đây
 
@@ -51,6 +58,8 @@ exports.addSanPham = async (req, res, next)=>{
         objSP.name = req.body.name;
         objSP.price = req.body.price;
         objSP.description = req.body.description;
+        objSP.id_theloai = req.body.theloai;
+
         // thực hiện Ghi vào CSDL
         try {
             let new_sp = await objSP.save();
@@ -63,6 +72,52 @@ exports.addSanPham = async (req, res, next)=>{
 
     }
 
-    res.render('sanpham/add-san-pham', { msg: msg});
+    res.render('sanpham/add-san-pham', { msg: msg, listTL: listTL });
+}
+
+
+exports.editSP = async (req, res, next)=>{
+    let msg = '';
+    let idsp = req.params.idsp;
+
+    // lấy thông tin sản phẩm hiển thị lên giao diện
+    try {
+        var objSP  = await myMD.spModel.findById(idsp);
+        var listTL = await myMD.theLoaiModel.find();
+
+
+    } catch (error) {
+        msg = 'Lỗi ' + error.message; 
+    }
+
+    /// xử lý post 
+
+    if(req.method =='POST'){
+        // kiểm tra hợp lệ dữ liệu ở đây
+
+        // tạo đối tượng model và gán dữ liệu
+        let objSP = new myMD.spModel ();
+        objSP.name = req.body.name;
+        objSP.price = req.body.price;
+        objSP.description = req.body.description;
+        objSP.id_theloai = req.body.theloai;
+        objSP._id = idsp;
+
+        // thực hiện Ghi vào CSDL
+        try {
+            // let new_sp = await objSP.save(); // cái này của thêm mới
+            // console.log( new_sp );
+            
+            await myMD.spModel.findByIdAndUpdate( {_id: idsp}, objSP);
+
+            msg = 'Đã sửa thành công';
+        } catch (error) {
+            msg ='Lỗi '+ error.message;
+            console.log(error);
+        }
+
+    }
+
+    res.render('sanpham/edit-sp', {msg:msg, objSP: objSP, listTL:listTL});
 }
 

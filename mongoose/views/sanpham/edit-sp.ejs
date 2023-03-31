@@ -1,0 +1,34 @@
+<%- include('../inc/top') %>
+<h1>Sửa sản phẩm</h1>
+
+<% if(msg.length >0) { %>
+     <p class="alert alert-info">  <%= msg %>  </p>
+<% } %>
+
+<form action="" method="post" >
+
+    <select name="theloai" >
+        <% listTL.forEach( row => { 
+            let selected = '';// xác định thể loại đã chọn của sp
+                if(String( row._id ) == String(objSP.id_theloai) ){
+                    selected = '  selected ';
+                }
+
+            %>
+        <option <%= selected %> value="<%= row._id %>" >   <%= row.name  %>     </option>
+        <%  }) %>
+    </select> 
+    <br>
+
+    <input type="text" name="name" placeholder="Tên SP"
+            value="<%= objSP.name %>"
+    >  <br>
+    <input type="number" name="price" placeholder="Giá"
+            value="<%= objSP.price %>"
+    > <br>
+    <textarea name="description"cols="30" rows="10"><%= objSP.price %></textarea>
+ 
+    <button type="submit" onclick="return confirm('Gửi nhé')" >Save</button>
+     
+</form> 
+<%- include('../inc/bottom') %></input>

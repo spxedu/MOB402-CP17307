@@ -1,11 +1,18 @@
 <%- include('../inc/top') %>
 <h1>Add SP</h1>
 
-<% if(msg.legth >0) { %>
+<% if(msg.length >0) { %>
      <p class="alert alert-info">  <%= msg %>  </p>
 <% } %>
 
 <form action="" method="post" >
+
+    <select name="theloai" >
+        <% listTL.forEach( row => { %>
+        <option value="<%= row._id %>" >   <%= row.name  %>     </option>
+        <%  }) %>
+
+    </select> <br>
 
     <input type="text" name="name" placeholder="Tên SP" >  <br>
     <input type="number" name="price" placeholder="Giá"> <br>

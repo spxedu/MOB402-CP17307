@@ -8,14 +8,19 @@
         <th>Name</th>
         <th>Price</th>
         <th>Desc</th>
+        <th>Thể loại</th>
     </tr>
     <% listSP.forEach( (objSP) => { %>
         
         <tr>
-            <td> <%= objSP._id %> </td>
+            <td> 
+                <a href="/sp/edit/<%= objSP._id %>">  <%= objSP._id %> </a>
+               
+             </td>
             <td> <%= objSP.name %> </td>
             <td> <%= objSP.price %> </td>
             <td> <%= objSP.description %></td>
+            <td> <%= objSP.id_theloai.name %></td>
         </tr>
 
    <% }); %>
